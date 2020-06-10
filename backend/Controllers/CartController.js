@@ -9,6 +9,8 @@ module.exports.add = async (productId) => {
     const cartItem = await CartItem.findOne({ product: productId });
     cartItem.quantity += 1;
     cartItem.save();
+
+    return cartItem;
   } catch (err) {
     const product = await Product.findOne({ _id: productId });
     const cartItem = new CartItem({
@@ -23,6 +25,8 @@ module.exports.add = async (productId) => {
     await cartItem.save();
     cart.items.push(cartItem);
     await cart.save();
+
+    return cartItem;
   }
 };
 
@@ -42,9 +46,12 @@ module.exports.favorite = async (productId) => {
 
 module.exports.remove = async (productId) => {
   const cart = await Cart.findOne({ _id: '5edfe51b7524ced3b52bdb98' });
-  const cartItem = await CartItem.findOne({ product: productId });
+  const cartItem = await CartItem.findOneAndRemove({ product: productId });
+
+  // cartItem.remove();
 
   const itemIndexInCart = cart.items.findIndex((item) => item.equals(cartItem._id));
+  console.log('module.exports.remove -> itemIndexInCart', itemIndexInCart);
   if (itemIndexInCart > -1) {
     cart.items.splice(itemIndexInCart, 1);
     cart.save();

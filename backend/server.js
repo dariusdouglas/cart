@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const config = require('config');
 const cors = require('cors');
+const CartRoutes = require('./routes/Cart');
 
 // const Product = require('./models/Product');
 // const Cart = require('./models/Cart');
@@ -36,6 +37,7 @@ const db = config.get('mongoURI');
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use('/cart/', CartRoutes);
 
 mongoose
   .connect(db, {
