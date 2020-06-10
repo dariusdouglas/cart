@@ -7,8 +7,9 @@ const router = express.Router();
 
 router.get('/get', async (req, res) => {
   const cart = await Cart.findOne({});
+  const cartItems = await CartItem.find({});
 
-  res.json(cart);
+  res.json({ ...cart._doc, items: cartItems });
 });
 
 router.post('/add/', async (req, res) => {
@@ -16,7 +17,9 @@ router.post('/add/', async (req, res) => {
     CartController.add(req.body.productId);
     const cart = await Cart.findOne({});
 
-    res.json(cart);
+    const cartItems = await CartItem.find({});
+
+    res.json({ ...cart._doc, items: cartItems });
   } catch (err) {
     res.send(err);
   }
