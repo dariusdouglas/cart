@@ -9,7 +9,7 @@ const card = (props) => {
       <img src={item.image} />
       <p className="cardName">{item.name}</p>
       <p className="cardPrice">${item.price}</p>
-      <Button quantity={item.quantity} id={item.product} />
+      <Button quantity={item.quantity} id={item.product} favorite={item.favorite} />
     </div>
   );
 };

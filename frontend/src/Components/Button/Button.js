@@ -1,27 +1,41 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import { ItemContext, ItemProvider } from '../../Context/index';
 
 import './Button.scss';
 
 const Button = (props) => {
-  const { quantity, id } = props;
+  const { quantity, id, favorite } = props;
 
   const context = useContext(ItemContext);
-  const { cart } = context;
+
+  const btnContainerRef = useRef(null);
+  const [quantityLabel, updateQuantity] = useState(quantity);
+  const [isFavorite, toggleFavorite] = useState(favorite);
 
   const handleClick = (e) => {
-    context.addToCart(e.target.id);
+    updateQuantity(quantityLabel + 1);
+    context.addToCart(btnContainerRef.current.id);
   };
 
   const button = (
-    <button id={id} className="button" onClick={handleClick}>
+    <button className="button" onClick={handleClick}>
       Add to Cart
     </button>
   );
 
+  const handleFavoriteClick = (e) => {
+    toggleFavorite(!isFavorite);
+    context.favorite(btnContainerRef.current.id);
+  };
+
+  const starClasses = isFavorite ? 'fa fa-star checked' : 'fa fa-star';
+
   return (
-    <div className="button-container">
-      {button} | <span className="priceText">{quantity}</span>
+    <div id={id} ref={btnContainerRef} className="button-container">
+      {button} | <span className="priceText">{quantityLabel}</span>
+      <span className="icon" onClick={handleFavoriteClick}>
+        <i className={starClasses}></i>
+      </span>
     </div>
   );
 };

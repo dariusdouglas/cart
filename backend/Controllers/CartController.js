@@ -8,7 +8,7 @@ module.exports.add = async (productId) => {
   try {
     const cartItem = await CartItem.findOne({ product: productId });
     cartItem.quantity += 1;
-    cartItem.save();
+    await cartItem.save();
 
     return cartItem;
   } catch (err) {
@@ -41,7 +41,7 @@ module.exports.decrement = async (productId) => {
 module.exports.favorite = async (productId) => {
   const cartItem = await CartItem.findOne({ product: productId });
   cartItem.favorite = !cartItem.favorite;
-  cartItem.save();
+  await cartItem.save();
 };
 
 module.exports.remove = async (productId) => {

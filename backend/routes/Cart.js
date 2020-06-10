@@ -14,9 +14,8 @@ router.get('/get', async (req, res) => {
 
 router.post('/add/', async (req, res) => {
   try {
-    CartController.add(req.body.productId);
+    await CartController.add(req.body.productId);
     const cart = await Cart.findOne({});
-
     const cartItems = await CartItem.find({});
 
     res.json({ ...cart._doc, items: cartItems });
@@ -27,7 +26,7 @@ router.post('/add/', async (req, res) => {
 
 router.post('/remove/', async (req, res) => {
   try {
-    CartController.remove(req.body.productId);
+    await CartController.remove(req.body.productId);
     const cart = await Cart.findOne({});
 
     res.json(cart);
@@ -38,7 +37,7 @@ router.post('/remove/', async (req, res) => {
 
 router.post('/decrement/', async (req, res) => {
   try {
-    CartController.decrement(req.body.productId);
+    await CartController.decrement(req.body.productId);
     const cart = await Cart.findOne({});
 
     res.json(cart);
@@ -49,10 +48,11 @@ router.post('/decrement/', async (req, res) => {
 
 router.post('/favorite/', async (req, res) => {
   try {
-    CartController.favorite(req.body.productId);
-    const cart = await CartItem.findOne({ product: req.body.productId });
+    await CartController.favorite(req.body.productId);
+    const cart = await Cart.findOne({});
+    const cartItems = await CartItem.find({});
 
-    res.json(cart);
+    res.json({ ...cart._doc, items: cartItems });
   } catch (err) {
     res.send(err);
   }
