@@ -4,15 +4,15 @@ const ItemContext = React.createContext();
 
 const ItemProvider = (props) => {
   const [cart, setCart] = useState([]);
-  const [gotCart, setGotCart] = useState(false);
+//   const [gotCart, setGotCart] = useState(false);
 
   const getItems = async () => {
     if (!gotCart) {
       const response = await fetch('http://localhost:8000/cart/get');
       const cartResponse = await response.json();
       setCart(cartResponse);
-      setGotCart(true);
-    }
+    //   setGotCart(true);
+    // }
   };
 
   const addToCart = async (productId) => {
