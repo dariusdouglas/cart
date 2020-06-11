@@ -10,7 +10,8 @@ module.exports.add = async (productId) => {
     cartItem.quantity += 1;
     await cartItem.save();
 
-    return cartItem;
+    cart.amount += cartItem.price;
+    await cart.save();
   } catch (err) {
     const product = await Product.findOne({ _id: productId });
     const cartItem = new CartItem({
@@ -24,6 +25,8 @@ module.exports.add = async (productId) => {
 
     await cartItem.save();
     cart.items.push(cartItem);
+
+    cart.amount += cartItem.price;
     await cart.save();
 
     return cartItem;

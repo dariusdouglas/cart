@@ -1,0 +1,22 @@
+.header {
+  box-shadow: black 2px 2px 2px;
+  font-size: 20px;
+  border: 1px solid black;
+  background-color: #ba6f22;
+  color: white;
+  width: 75%;
+  margin: 20px auto;
+
+  ul {
+    li {
+      padding: 0 10px;
+      display: inline-block;
+
+      .cartImage {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

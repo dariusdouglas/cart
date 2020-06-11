@@ -5,11 +5,11 @@ import './CardGrid.scss';
 
 const CardGrid = () => {
   const context = useContext(ItemContext);
-  const { cart } = context;
+  const { products } = context;
 
   const cardGrid =
-    cart.items &&
-    cart.items.map((item, index) => {
+    products &&
+    products.map((item, index) => {
       return <Card key={index} item={item} />;
     });
 

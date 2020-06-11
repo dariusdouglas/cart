@@ -4,6 +4,13 @@ const ItemContext = React.createContext();
 
 const ItemProvider = (props) => {
   const [cart, setCart] = useState([]);
+  const [products, setProducts] = useState([]);
+
+  const getProducts = async () => {
+    const response = await fetch('http://localhost:8000/products/get');
+    const cartResponse = await response.json();
+    setProducts(cartResponse);
+  };
 
   const getItems = async () => {
     const response = await fetch('http://localhost:8000/cart/get');
@@ -26,7 +33,6 @@ const ItemProvider = (props) => {
       body: JSON.stringify({ productId }), // body data type must match "Content-Type" header
     });
     const newCart = await response.json(); // parses JSON response into native JavaScript objects
-    console.log('favorite -> newCart', newCart);
     setCart(newCart);
   };
 
@@ -45,7 +51,6 @@ const ItemProvider = (props) => {
       body: JSON.stringify({ productId }), // body data type must match "Content-Type" header
     });
     const newCart = await response.json(); // parses JSON response into native JavaScript objects
-    console.log('favorite -> newCart', newCart);
     setCart(newCart);
   };
 
@@ -53,8 +58,12 @@ const ItemProvider = (props) => {
     getItems();
   }, []);
 
+  useEffect(() => {
+    getProducts();
+  }, [products]);
+
   return (
-    <ItemContext.Provider value={{ cart, addToCart, favorite }}>
+    <ItemContext.Provider value={{ cart, products, addToCart, favorite }}>
       {props.children}
     </ItemContext.Provider>
   );

@@ -1,8 +1,9 @@
 .cardGrid {
   display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
   // columns: 15em;
+  width: 75%;
+  margin: auto;
 }
 
 .cardGrid::after {
