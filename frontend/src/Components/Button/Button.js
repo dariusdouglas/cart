@@ -24,8 +24,6 @@ const Button = (props) => {
       setCartItem(correspondingCartItem);
       updateQuantity(correspondingCartItem.quantity);
       toggleFavorite(correspondingCartItem.favorite);
-    } else {
-      updateQuantity(0);
     }
   };
 
@@ -36,7 +34,7 @@ const Button = (props) => {
   }, [cart.items]);
 
   const handleClick = (e) => {
-    updateQuantity((q) => q + 1);
+    updateQuantity(quantityLabel + 1);
     context.addToCart(btnContainerRef.current.id);
   };
 
