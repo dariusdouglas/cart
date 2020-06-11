@@ -26,14 +26,14 @@ const Card = (props) => {
   //     />
   //   );
 
-  let button;
-  //   let button2;
+  //   let button;
+  //   //   let button2;
 
-  if (cartItem && cartItem.quantity) {
-    button = <Button quantity={cartItem.quantity} id={item._id} favorite={cartItem.favorite} />;
-  } else {
-    button = <Button quantity={0} id={item._id} favorite={false} />;
-  }
+  //   if (cartItem && cartItem.quantity) {
+  //     button = <Button quantity={cartItem.quantity} id={item._id} favorite={cartItem.favorite} />;
+  //   } else {
+  //     button = <Button quantity={0} id={item._id} favorite={false} />;
+  //   }
 
   //   const finalButton = button ? button : button2;
 
@@ -53,7 +53,7 @@ const Card = (props) => {
       <img src={item.image} />
       <p className="cardName">{item.name}</p>
       <p className="cardPrice">${item.price}</p>
-      {button}
+      {/* {button} */}
       {/* {cartItem && cartItem.quantity ? (
         <Button quantity={cartItem.quantity} id={item._id} favorite={cartItem.favorite} />
       ) : (
@@ -62,6 +62,7 @@ const Card = (props) => {
       {/* {cartItem && cartItem.quantity && (
         <Button quantity={cartItem.quantity} id={item._id} favorite={cartItem.favorite} />
       )} */}
+      <Button item={item} />
     </div>
   );
 };
