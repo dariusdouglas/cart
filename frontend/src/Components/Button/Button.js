@@ -27,6 +27,8 @@ const Button = (props) => {
     }
   };
 
+  // check if item was found
+  // if it was, no need to find the item again
   useEffect(() => {
     if (!itemWasFound) {
       getCorrespondingCartItem();

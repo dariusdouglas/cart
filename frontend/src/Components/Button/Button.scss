@@ -1,6 +1,6 @@
 .button-container {
   .button {
-    margin-left: 5px;
+    margin-left: 10px;
     border-radius: 3px;
     // box-shadow: black 3px 2px 3px;
     width: 75%;
@@ -13,13 +13,18 @@
     cursor: pointer;
 
     &:hover {
-      //   color: white;
+      border: 3px solid red;
     }
 
     .cartImage {
       margin-left: 20px;
       margin-right: 5px;
       //   color: black;
+    }
+
+    @media (min-width: 453px) and (max-width: 1024px) {
+      margin: auto auto 5px auto;
+      width: 100%;
     }
   }
 
@@ -28,8 +33,16 @@
   }
 
   .icon {
-    padding-left: 5px;
-    padding-right: 5px;
+    @media (min-width: 453px) and (max-width: 1024px) {
+      // margin: auto;
+      width: 100%;
+      padding-left: 85px;
+    }
+
+    @media (min-width: 1025px) {
+      padding-left: 15px;
+      padding-right: 5px;
+    }
     .checked {
       color: orange;
     }
